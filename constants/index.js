@@ -1,4 +1,3 @@
-//here is index.js. AI!
 
 const navLinks = [
     {
