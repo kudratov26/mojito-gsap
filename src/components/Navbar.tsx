@@ -1,6 +1,5 @@
-// I have a warning here. AI!
 
-import { navLinks } from '../../constants/index.js'
+import { navLinks } from '../../constants/index'
 
 const Navbar = () => {
     return (
