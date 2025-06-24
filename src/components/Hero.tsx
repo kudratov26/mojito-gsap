@@ -2,7 +2,7 @@ import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { SplitText } from "gsap/all"
 import { useMediaQuery } from "react-responsive"
-import { useRef } from "react"
+import { useCallback, useRef } from "react"
 
 const Hero = () => {
 
@@ -16,7 +16,7 @@ const Hero = () => {
         if (!videoRef.current) return
         const currentScroll = window.pageYOffset
         const deltaY = currentScroll - lastScroll.current
-        
+
         // Update video playback based on scroll
         if (Math.abs(deltaY) > 0) {
             videoRef.current.play()
@@ -34,7 +34,7 @@ const Hero = () => {
 
         // Clear any existing timeout
         if (timeout.current) clearTimeout(timeout.current)
-        
+
         // Set timeout to pause video when scrolling stops
         timeout.current = setTimeout(() => {
             if (videoRef.current) {
@@ -46,7 +46,7 @@ const Hero = () => {
     useGSAP(() => {
         // Set up scroll listener
         window.addEventListener('scroll', handleScroll)
-        
+
         const heroSplit = new SplitText('.title', { type: 'chars, words' })
         const paragraphSplit = new SplitText('.subtitle', { type: 'lines' })
 
