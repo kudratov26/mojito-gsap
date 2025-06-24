@@ -118,6 +118,7 @@ const Hero = () => {
                     src="/videos/output.mp4"
                 />
             </div>
+
         </>
     );
 };
