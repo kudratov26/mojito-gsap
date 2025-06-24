@@ -6,11 +6,47 @@ import { useRef } from "react"
 
 const Hero = () => {
 
-    const videoRef = useRef()
-
+    const videoRef = useRef<HTMLVideoElement>(null)
+    const lastScroll = useRef<number>(0)
+    const lastDelta = useRef<number>(0)
+    const timeout = useRef<NodeJS.Timeout>()
     const isMobile = useMediaQuery({ maxWidth: 767 })
 
+    const handleScroll = useCallback(() => {
+        if (!videoRef.current) return
+        const currentScroll = window.pageYOffset
+        const deltaY = currentScroll - lastScroll.current
+        
+        // Update video playback based on scroll
+        if (Math.abs(deltaY) > 0) {
+            videoRef.current.play()
+            // Adjust playback speed/direction based on scroll delta
+            videoRef.current.playbackRate = Math.min(Math.abs(deltaY) * 0.1, 2)
+            videoRef.current.currentTime = Math.max(0, Math.min(
+                videoRef.current.currentTime + (deltaY * 0.01),
+                videoRef.current.duration
+            ))
+        }
+
+        // Store current scroll position
+        lastDelta.current = deltaY
+        lastScroll.current = currentScroll
+
+        // Clear any existing timeout
+        if (timeout.current) clearTimeout(timeout.current)
+        
+        // Set timeout to pause video when scrolling stops
+        timeout.current = setTimeout(() => {
+            if (videoRef.current) {
+                videoRef.current.pause()
+            }
+        }, 150)
+    }, [])
+
     useGSAP(() => {
+        // Set up scroll listener
+        window.addEventListener('scroll', handleScroll)
+        
         const heroSplit = new SplitText('.title', { type: 'chars, words' })
         const paragraphSplit = new SplitText('.subtitle', { type: 'lines' })
 
@@ -42,9 +78,11 @@ const Hero = () => {
         })
             .to('.right-leaf', { y: 200 }, 0)
             .to('.left-leaf', { y: -200 }, 0)
-
-        const startValue = isMobile ? 'top 50%' : 'center 60%';
-        const endValue = isMobile ? '120% top' : 'bottom top';
+        // Cleanup scroll listener
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+            if (timeout.current) clearTimeout(timeout.current)
+        }
 
 
     }, [])
