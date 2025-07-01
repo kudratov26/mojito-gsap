@@ -1,5 +1,6 @@
 import gsap from 'gsap'
-import { openingHours, socials } from '/constants/index.js'
+//@ts-expect-error this is good
+import { openingHours, socials } from '../../constants/index.js'
 import { useGSAP } from '@gsap/react'
 import { SplitText } from 'gsap/all'
 
@@ -46,8 +47,8 @@ const Footer = () => {
                 </div>
                 <div>
                     <h3>Open Every Day</h3>
-                    {openingHours.map(({ day, time }) => (
-                        <p key={day}>{day}: {time}</p>
+                    {openingHours.map((todo: { day: string, time: string }) => (
+                        <p key={todo.day}>{todo.day}: {todo.time}</p>
                     ))}
                 </div>
                 <div>
