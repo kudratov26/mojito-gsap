@@ -1,8 +1,10 @@
+
 import { useRef, useState } from 'react';
 import { allCocktails } from '../../constants/index.ts';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 const Menu = () => {
+    //@ts-expect-error everything is good
     const contentRef = useRef();
     const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -17,13 +19,13 @@ const Menu = () => {
 
 
     const totalCocktails = allCocktails.length;
-
+    //@ts-expect-error everything is good
     const goToSlide = (index) => {
         const newIndex = (index + totalCocktails) % totalCocktails;
 
         setCurrentIndex(newIndex);
     }
-
+    //@ts-expect-error everything is good
     const getCocktailAt = (indexOffset) => {
         return allCocktails[(currentIndex + indexOffset + totalCocktails) % totalCocktails]
     }

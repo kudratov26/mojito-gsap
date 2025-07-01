@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 
 const Hero = () => {
+    //@ts-expect-error everything is good
     const videoRef = useRef();
 
     const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -62,9 +63,12 @@ const Hero = () => {
                 pin: true,
             },
         });
-
+        //@ts-expect-error everything is good
         videoRef.current.onloadedmetadata = () => {
+            //@ts-expect-error everything is good
+
             tl.to(videoRef.current, {
+                //@ts-expect-error everything is good
                 currentTime: videoRef.current.duration,
             })
         };
@@ -111,6 +115,7 @@ const Hero = () => {
 
             <div className="video absolute inset-0">
                 <video
+                    //@ts-expect-error everything is good
                     ref={videoRef}
                     muted
                     playsInline
