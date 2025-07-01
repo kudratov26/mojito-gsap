@@ -54,7 +54,7 @@ const Hero = () => {
         const startValue = isMobile ? "top 50%" : "center 60%";
         const endValue = isMobile ? "120% top" : "bottom top";
 
-        let tl = gsap.timeline({
+        const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "video",
                 start: startValue,
@@ -115,7 +115,7 @@ const Hero = () => {
 
             <div className="video absolute inset-0">
                 <video
-                    //@ts-expect-error everything is good
+                    // @ts-expect-error everything is good
                     ref={videoRef}
                     muted
                     playsInline

@@ -69,6 +69,7 @@ const Menu = () => {
                     <img src={`${currentCocktail.image}`} alt="" />
                 </div>
                 <div className="recipe">
+                    {/* @ts-expect-error everything is good */}
                     <div ref={contentRef} className="info">
                         <p>Recipe for:</p>
                         <p id="title">{currentCocktail.name}</p>
