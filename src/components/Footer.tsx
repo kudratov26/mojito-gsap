@@ -1,6 +1,5 @@
 import gsap from 'gsap'
-//@ts-expect-error this is good
-import { openingHours, socials } from '../../constants/index.js'
+import { openingHours, socials } from '../../constants/index.ts'
 import { useGSAP } from '@gsap/react'
 import { SplitText } from 'gsap/all'
 

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { allCocktails } from '/constants/index.js'
+import { allCocktails } from '../../constants/index.ts';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 const Menu = () => {
